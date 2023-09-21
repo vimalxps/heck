@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>return to home</title>
+   <link rel="stylesheet" href="{% static 'css/msgst.css' %}">
+</head>
+<body>
+
+      <div class="center-container">
+        <h1>Your purcahse was sucessfully completed. Return to home</h1>
+          <a href="/"><button>home</button></a>                             <a href="{% url 'shop:logout' %}"><button>Logout</button></a>
+    </div>
+</body>
+</html>

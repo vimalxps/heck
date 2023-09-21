@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="/" style="font-size:40px;padding-right:10px;padding-left:10px;color:blue;font-weight:600;">College Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item" style="font-size: 18px;font-color: white;font-weight:600;">
+          <a class="nav-link" href="{% url 'shop:allProdCat' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown {% if 'shop' in request.path %}active{% endif %}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" style="font-size: 18px;font-color: white;font-weight:600;">
+            Departments
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+             <div class="dropdown-content" style="width=auto";>
+               <li style="font-size: 14px;font-color: white;font-weight:100;"><a class= "btn" href="https://en.wikipedia.org/wiki/Computer_science">Computer Science</a></li>
+                 <li><hr class="dropdown-divider"></li>
+               <ul style="font-size: 14px;font-color: white;font-weight:100;"><a class= "btn" href="https://en.wikipedia.org/wiki/Commerce">Commerce</a></ul>
+                 <li><hr class="dropdown-divider"></li>
+               <ul style="font-size: 14px;font-color: white;font-weight:100;"><a class= "btn" href="https://en.wikipedia.org/wiki/History">History</a></ul>
+                 <li><hr class="dropdown-divider"></li>
+               <ul style="font-size: 14px;font-color: white;font-weight:100;"><a class= "btn" href="https://en.wikipedia.org/wiki/Business_studies">Buisiness</a></ul>
+             </div>
+
+          </ul>
+        </li>
+        {% if item_count > 0 %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fa-solid fa-cart-plus"></i>({{item_count}})</a>
+        </li>
+        {% endif %}
+      </ul>
+      <form class="d-flex" action="{% url 'search_app:SearchResult' %}" method="get">
+       {% if user.is_authenticated %}
+        <ul><h4>Hello {{user.username}}</h4></ul>
+         <ul><a class="btn btn-danger" href="{% url 'shop:logout' %}"   >LogOut</a></ul>
+        {% else %}
+        <ul><a class="btn btn-dark" href="{% url 'shop:register' %}">REGISTER</a></ul>
+        <ul><a class="btn btn-info" href="{% url 'shop:login' %}"   >LOGIN</a></ul>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</nav>

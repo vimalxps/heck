@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale:1.0">
+    <title>login</title>
+    <meta http-equiv="X-UA Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body style="display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background:#081b29;">
+<div class="wrapper">
+    <div class="form-box login">
+        <h2 style="padding-left:50%;color:lime;font-weight:300%;">Register</h2>
+        <form  method="post">
+            {% csrf_token %}
+            <div class="input-box">
+                <input type="text" name="username" required>
+                <label>Username</label>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="email" name="email" required>
+                <label>Email</label>
+                <i class='bx bxs-envelope'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" required>
+                <label>Password</label>
+                <i class='bx bxs-lock-alt' ></i>
+            </div>
+            <div class="input-box">
+                <input type="password" name="confirm" required>
+                <label>Confirm Password</label>
+                <i class='bx bxs-lock-alt' ></i>
+            </div>
+            <button type="submit" class="lg-btn">Register</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

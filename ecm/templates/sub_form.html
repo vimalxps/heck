@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale:1.0">
+    <title>login</title>
+    <meta http-equiv="X-UA Compatible" content="IE=edge">
+<!-- <link rel="stylesheet" href="{% static 'css/formstyle.css' %}">&ndash;&gt;-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<script>
+var subjectObject = {
+  "Study": {
+    "Commerce": ["CA", "B.com", "M.com"],
+    "Science": ["Bsc", "Msc", "Physics", "Chemistry"],
+    "Arts": ["Economics", "Philosophy", "History", "Literature"]
+  },
+  "Enquiry": {
+    "Purchase_Item": ["Studies", "Tutors", "Events"],
+    "Contact_Us": ["E-mail", "Address", "PhoneNo"]
+  }
+}
+window.onload = function() {
+  var subjectSel = document.getElementById("subject");
+  var topicSel = document.getElementById("topic");
+  var chapterSel = document.getElementById("chapter");
+  for (var x in subjectObject) {
+    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+  }
+  subjectSel.onchange = function() {
+ //empty Chapters- and Topics- dropdowns
+ chapterSel.length = 1;
+ topicSel.length = 1;
+    //display correct values
+    for (var y in subjectObject[this.value]) {
+      topicSel.options[topicSel.options.length] = new Option(y, y);
+    }
+  }
+  topicSel.onchange = function() {
+ //empty Chapters dropdown
+ chapterSel.length = 1;
+    //display correct values
+    var z = subjectObject[subjectSel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+}
+</script>
+</head>
+<body style="display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background:grey;">
+<div class="wrapper">
+    <div class="form-box login">
+        <h2 style="padding-left:50%;color:lime;font-size:30px;font-weight:300%;">Form</h2>
+        <form  method="post">
+            {% csrf_token %}
+            <label style="padding-left:30%;color:lime;font-size:18px;font-weight:300%;">Name</label>
+            <div class="input-box" style="padding-left:30%;">
+                <input style="width:250px;height:30px;" type="text" name="username" required>
+
+
+            </div><br>
+            <label style="padding-left:30%;color:lime;font-size:18px;font-weight:300%;">D.O.B</label>
+            <div class="input-box" style="padding-left:30%;">
+                <input type="date" name="date" required style="width:250px;height:30px;">
+
+
+            </div><br>
+
+            <label style="padding-left:30%;color:lime;font-size:18px;font-weight:300%;">Gender</label>
+            <div class="input-box" style="padding-left:30%;">
+
+                <input type="radio" name="gender" value="male">Male
+                <input type="radio" name="gender" value="female">Female
+
+
+            </div><br>
+
+            <label style="padding-left:30%;color:lime;font-size:18px;font-weight:300%;">Email</label>
+            <div class="input-box" style="padding-left:30%;">
+                <input type="email" name="email" required style="width:250px;height:30px;">
+
+
+            </div><br>
+
+
+            <label style="padding-left:30%;color:lime;font-size:18px;font-weight:300%;">Password</label>
+            <div class="input-box" style="padding-left:30%;">
+                <input type="password" name="password" required style="width:250px;height:30px;">
+
+
+            </div><br>
+
+
+            <label style="padding-left:30%;color:lime;font-size:18px;font-weight:300%;">Phone Number</label>
+            <div class="input-box" style="padding-left:30%;">
+                <input type="number" name="number" required style="width:250px;height:30px;">
+
+
+            </div><br>
+            <label style="padding-left:30%;color:lime;font-size:18px;font-weight:300%;">Address</label>
+            <div class="input-box" style="padding-left:30%;height:20%;">
+                <input type="text" name="address" required style="width:250px;height:90px;">
+
+
+            </div><br>
+            <div class="input-box">
+                <label style="padding-left:30%;color:lime;font-size:18px;font-weight:300%;">Purposes:</label>
+                 <select name="subject" id="subject">
+                    <option value="" selected="selected" style="width:250px;height:30px;">About</option>
+                  </select>
+                  <br><br>
+                <label style="padding-left:30%;color:font-size:18px;color:lime;font-weight:300%;">Department:</label>
+                 <select name="topic" id="topic">
+                    <option value="" selected="selected" style="width:250px;height:30px;">-----------</option>
+                  </select>
+                  <br><br>
+                 <label style="padding-left:30%;font-size:18px;color:lime;font-weight:300%;"> Courses:</label>
+                <select name="chapter" id="chapter" >
+                    <option value="" selected="selected" style="width:250px;height:30px;">----------</option>
+                </select>
+            </div><br><br>
+            <label style="padding-left:30%;color:lime;font-size:18px;font-weight:300%;">Materials Required</label>
+             <div class="input-box" style="padding-left:30%;">
+                <input type="checkbox" name="materials" value="debit_notebook">Debit_Notebook
+                 <input type="checkbox" name="materials" value="pen">Pen
+                 <input type="checkbox" name="materials" value="exam_paper">Exam_Paper
+                 <input type="checkbox" name="materials" value="record_book">Record_book
+
+            </div><br><br><br>
+        <center>
+            <a href="{% url 'shop:success' %}"><button style="color:white;font-size:16px;font-weight:300;height:30px;width:100px;background:green" >Submit</button></a>
+        </center>
+
+        </form>
+        <br>
+        <center>
+            <a href="{% url 'shop:logout' %}"><button style="color:white;font-size:16px;font-weight:300;height:30px;width:100px;background:red" >Logout</button></a>
+        </center>
+    </div>
+
+</div>
+</body>
+</html>
